@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formularze z Car Zone Katowice</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #4caf50, #2e7d32);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2em;
+    }
+
+    h1 {
+      margin-bottom: 1em;
+      text-align: center;
+    }
+
+    .form-container {
+      display: flex;
+      gap: 2em;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    form {
+      background: #fff;
+      color: #333;
+      padding: 1.5em;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    form img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1em;
+    }
+
+    label {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8em;
+      margin-bottom: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #4caf50;
+      outline: none;
+    }
+
+    button {
+      padding: 0.8em;
+      background: linear-gradient(135deg, #4caf50, #2e7d32);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #2e7d32, #4caf50);
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .success, .error {
+      font-size: 0.9em;
+      padding: 0.5em;
+      border-radius: 5px;
+      margin-top: 0.5em;
+      display: none;
+    }
+
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .instructions {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1.5em;
+        margin-bottom: 2em;
+        border-radius: 10px;
+        max-width: 800px;
+        text-align: center;
+        backdrop-filter: blur(4px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .instructions h2 {
+        font-size: 1.5em;
+        margin-bottom: 0.5em;
+        color: #fff;
+    }
+
+    .instructions p {
+        font-size: 1em;
+        color: #f0f0f0;
+        line-height: 1.6;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Formularze z Car Zone Katowice</h1>
+  <div class="instructions">
+    <h2>Jak używać tej strony?</h2>
+    <p>
+      Wybierz odpowiedni formularz z dostępnych poniżej i uzupełnij wymagane pola – tytuł i treść. 
+      Po kliknięciu przycisku „Wyślij”, Twoja wiadomość zostanie przesłana na odpowiedni kanał Discord. 
+      Pamiętaj, jeśłi chcesz oznaczyc kogos na discordzie daną osobe to trzeba napisac np <@ID-Uzytkownika>
+      A Gdy chcesz oznaczyc range to musisz <@ID-Rangi> jesli chcesz oznaczyc kanal to musisz <#ID-Kanału>
+  </div>
+  
+  <div class="form-container">
+    <!-- Formularze 1 do 10 -->
+
+
+    <form id="form1">
+      <label for="title1">Regulamin</label>
+      <input type="text" id="title1" name="title1" value="# Regulamin" placeholder="Podaj tytuł" required>
+      <textarea id="content1" name="content1" rows="4" placeholder="Podaj treść" required></textarea>
+      <button type="submit">Wyślij</button>
+      <p id="success1" class="success"></p>
+      <p id="error1" class="error"></p>
+    </form>
+
+    <form id="form2">
+      <label for="title2">Ogłoszenia</label>
+      <input type="text" id="title2" name="title2" value="# Ogłoszenia" placeholder="Podaj tytuł" required>
+      <textarea id="content2" name="content2" rows="4" placeholder="Podaj treść" required></textarea>
+      <button type="submit">Wyślij</button>
+      <p id="success2" class="success"></p>
+      <p id="error2" class="error"></p>
+    </form>
+
+    <form id="form3">
+      <label for="title3">Cennik</label>
+      <input type="text" id="title3" name="title3" value="# Cennik" placeholder="Podaj tytuł" required>
+      <textarea id="content3" name="content3" rows="4" placeholder="Podaj treść" required></textarea>
+      <button type="submit">Wyślij</button>
+      <p id="success3" class="success"></p>
+      <p id="error3" class="error"></p>
+    </form>
+
+    <form id="form4">
+      <label for="title4">Odznaki</label>
+      <input type="text" id="title4" name="title4" value="# Odznaki" placeholder="Podaj tytuł" required>
+      <textarea id="content4" name="content4" rows="4" placeholder="Podaj treść" required></textarea>
+      <button type="submit">Wyślij</button>
+      <p id="success4" class="success"></p>
+      <p id="error4" class="error"></p>
+    </form>
+
+    <form id="form5">
+      <label for="title5">Sprzęt</label>
+      <input type="text" id="title5" name="title5" value="# Sprzęt" placeholder="Podaj tytuł" required>
+      <textarea id="content5" name="content5" rows="4" placeholder="Podaj treść" required></textarea>
+      <button type="submit">Wyślij</button>
+      <p id="success5" class="success"></p>
+      <p id="error5" class="error"></p>
+    </form>
+
+    <form id="form6">
+      <label for="title6">Radio</label>
+      <input type="text" id="title6" name="title6" value="# Radio" placeholder="Podaj tytuł" required>
+      <textarea id="content6" name="content6" rows="4" placeholder="Podaj treść" required></textarea>
+      <button type="submit">Wyślij</button>
+      <p id="success6" class="success"></p>
+      <p id="error6" class="error"></p>
+    </form>
+
+    <form id="form12">
+        <label for="title12">Kompedium</label>
+        <input type="text" id="title12" name="title12" value="# Kompedium" placeholder="Podaj tytuł" required>
+        <textarea id="content12" name="content12" rows="4" placeholder="Podaj treść" required></textarea>
+        <button type="submit">Wyślij</button>
+        <p id="success12" class="success"></p>
+        <p id="error12" class="error"></p>
+      </form>
+
+    <form id="form7">
+        <label for="title7">Wypłaty</label>
+        <input type="text" id="title7" name="title7" value="# Wypłata" placeholder="Podaj tytuł" required>
+        <textarea id="content7" name="content7" rows="4" placeholder="Podaj treść" required>
+Kto:
+Komu:
+Kwota:
+Ilość godzin:
+</textarea>
+        <label for="mention7">Oznaczenie danego gracza:</label>
+        <input type="text" id="mention7" name="mention7" placeholder="<@ID-Uzytkownika>">
+        <button type="submit">Wyślij</button>
+        <p id="success7" class="success"></p>
+        <p id="error7" class="error"></p>
+      </form>
+      
+      <form id="form8">
+        <label for="title8">Zwolnienia / Zawieszenia</label>
+        <select id="title8" name="title8" required>
+          <option value="">-- Wybierz --</option>
+          <option value="Zwolnienie">Zwolnienie</option>
+          <option value="Zawieszenie">Zawieszenie</option>
+        </select>
+        <textarea id="content8" name="content8" rows="4"  placeholder="Podaj treść" required>
+Kto:
+Kogo:
+Powod:
+Na ile:
+</textarea>
+        <label for="mention8">Oznaczenie danego gracza:</label>
+        <input type="text" id="mention8" name="mention8" placeholder="<@ID-Uzytkownika>">
+        <button type="submit">Wyślij</button>
+        <p id="success8" class="success"></p>
+        <p id="error8" class="error"></p>
+      </form>
+      
+      <form id="form9">
+        <label for="title9">Awans / Degrad</label>
+        <select id="title9" name="title9" required>
+          <option value="">-- Wybierz --</option>
+          <option value="Awans">Awans</option>
+          <option value="Degrad">Degrad</option>
+        </select>
+        <textarea id="content9" name="content9" rows="4" placeholder="Podaj treść" required>
+Kto:
+Komu:
+Co:
+Za co:
+</textarea>
+        <label for="mention9">Oznaczenie danego gracza:</label>
+        <input type="text" id="mention9" name="mention9" placeholder="<@ID-Uzytkownika>">
+        <button type="submit">Wyślij</button>
+        <p id="success9" class="success"></p>
+        <p id="error9" class="error"></p>
+      </form>
+      
+      <form id="form10">
+        <label for="title10">Plusy / Minusy</label>
+        <select id="title10" name="title10" required>
+          <option value="">-- Wybierz --</option>
+          <option value="Plus">Plus</option>
+          <option value="Minus">Minus</option>
+        </select>
+        <textarea id="content10" name="content10" rows="4" placeholder="Podaj treść" required>
+Kto:
+Komu:
+Co:
+Za co:
+</textarea>
+        <label for="mention10">Oznaczenie danego gracza:</label>
+        <input type="text" id="mention10" name="mention10" placeholder="<@ID-Uzytkownika>">
+        <button type="submit">Wyślij</button>
+        <p id="success10" class="success"></p>
+        <p id="error10" class="error"></p>
+      </form>
+
+    <form id="form11">
+        <label for="title11">Auto Car Dealer</label>
+        <input type="text" id="title11" name="title11" value="# Auta" placeholder="Podaj tytuł" required>
+        <textarea id="content11" name="content11" rows="4" placeholder="Podaj treść" required>
+Nazwa: 
+Cena: 
+Możliwość tune: 
+Klasa:
+</textarea>
+        <label for="imageUrl11">Link do zdjęcia pojazdu</label>
+        <input type="url" id="imageUrl11" name="imageUrl11" placeholder="Wprowadź link do zdjęcia" required>
+        <button type="submit">Wyślij</button>
+        <p id="success11" class="success"></p>
+        <p id="error11" class="error"></p>
+    </form>
+  <script>
+    // Wspólny cooldown dla wszystkich formularzy
+    const cooldownKey = "shared-cooldown";
+    const cooldownTime = 0; // 1 minuta
+
+    const handleFormSubmit = (formId, titleId, contentId, successId, errorId, webhookURL, mentionEv = false, mentionId = null) => {
+  document.getElementById(formId).addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const title = document.getElementById(titleId).value;
+    const content = document.getElementById(contentId).value;
+    const mentionText = mentionId ? document.getElementById(mentionId).value : ''; // Pobieramy tekst z pola dla użytkownika
+    const imageUrl = document.getElementById('imageUrl11').value; // Link do zdjęcia
+    const successMessage = document.getElementById(successId);
+    const errorMessage = document.getElementById(errorId);
+    const now = Date.now();
+
+    successMessage.style.display = "none";
+    errorMessage.style.display = "none";
+
+    const lastSent = localStorage.getItem(cooldownKey);
+
+    if (lastSent && now - lastSent < cooldownTime) {
+      errorMessage.style.display = "block";
+      return;
+    }
+
+    // Jeśli pole tekstowe jest wypełnione, zamieniamy @everyone na ten tekst
+    const mentionContent = mentionText ? mentionText : (mentionEv ? "@everyone" : "");
+
+    const embed = {
+      title: title,
+      description: content,
+      color: 0x9b59b6,
+    };
+
+    // Jeśli wprowadzono link do zdjęcia, dodajemy go do embed
+    if (imageUrl) {
+      embed.image = { url: imageUrl };
+    }
+
+    const payload = {
+      content: mentionContent,
+      embeds: [embed],
+    };
+
+    try {
+      const response = await fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        successMessage.textContent = "Wiadomość została pomyślnie wysłana!";
+        successMessage.style.display = "block";
+        document.getElementById(formId).reset();
+        localStorage.setItem(cooldownKey, now);
+      } else {
+        throw new Error("Nie udało się wysłać ogłoszenia");
+      }
+    } catch (error) {
+      errorMessage.textContent = "Wystąpił błąd podczas wysyłania ogłoszenia.";
+      errorMessage.style.display = "block";
+    }
+  });
+};
+
+    // Inicjalizacja formularzy z wspólnym cooldownem
+    handleFormSubmit("form1", "title1", "content1", "success1", "error1", "https://discord.com/api/webhooks/1369749506618298470/hs7eRJDndtUj-TxDGgeHeYjoDDTjm2a8OwnxhXoC6mY_iYVAPfYWkleRNgFQ_riiXZib", true);
+    handleFormSubmit("form2", "title2", "content2", "success2", "error2", "https://discord.com/api/webhooks/1369748306476924938/aJztwoRT-HbDB_BseOOMg_vTtZhLzOyZO1Mv25QKecI-C7yVhhesvMXmXMjP8IILS2lW", true);
+    handleFormSubmit("form3", "title3", "content3", "success3", "error3", "https://discord.com/api/webhooks/1369748596139753596/DEguY4ywa41tQPqEW938_Zp1B8Sb0jYMyWccuEj44wfu4sHEbI0Wohzb3SoUwKIviTRy", true);
+    handleFormSubmit("form4", "title4", "content4", "success4", "error4", "https://discord.com/api/webhooks/1369760282787713064/shcoxG5_eanejdWPJT6qZOLcTSOLm0i4BTbtxC9wbCdwqJIN0ThjDCilDwzkIe2I19X6", true);
+    handleFormSubmit("form5", "title5", "content5", "success5", "error5", "https://discord.com/api/webhooks/1369760934540607609/1MulC13kLmf3Ur1ncOZPukQmOcAJk4A1QS8Gi6IE56bCCH0b3j1Bp46TIXH8NuZgh630", true);
+    handleFormSubmit("form6", "title6", "content6", "success6", "error6", "https://discord.com/api/webhooks/1369767849370980352/Bw6QmlOfVZ-QndrHBk3r49IpZKMqh6BlP5wAxwPHLUYH7yZmGDlDdfRs790J5xLWKIQf", true);
+    handleFormSubmit("form7", "title7", "content7", "success7", "error7", "https://discord.com/api/webhooks/1369767986914918542/tRvidCnNeTfaMnsm8oNuAy4iA35WXxdwXE7H6G5lknXSsqRYnJ7uKVWhikqjPsCJMNJO", false, "mention7");
+    handleFormSubmit("form8", "title8", "content8", "success8", "error8", "https://discord.com/api/webhooks/1369743209130889246/USRclMLlTk9Qb-ivOGWhkODD-f4lC4dwXopUJL7UAIXIuh9djShg_WNFfy6CINIfK3b1", false, "mention8");
+    handleFormSubmit("form9", "title9", "content9", "success9", "error9", "https://discord.com/api/webhooks/1369768396895424676/t0Iqujaq5ROzUNboREzU_RyIwpxciy1DGzPpDimVgqdzpiY4976MyW_ZuwaKi3t3tD7X", false, "mention9");
+    handleFormSubmit("form10", "title10", "content10", "success10", "error10", "https://discord.com/api/webhooks/1369768557084414142/JyLqeYjKwyoOOjmBIOuU5BpzpuHOz3GxAfbJeQEN3I8yQAs3LVN8sage6kAFJ-ipv-3U", false, "mention10");
+    handleFormSubmit("form11", "title11", "content11", "success11", "error11", "https://discord.com/api/webhooks/1369799193513955501/1Hn-WWoamLV5KobfKXp87odoA_h_sUCLI98vEZg50y7KZj8PBiQopcc0Vd6k0yPAEOIV", true);
+    handleFormSubmit("form12", "title12", "content12", "success12", "error12", "https://discord.com/api/webhooks/1369805601810677901/sXPieRVd7K1cACon36--T0s9p04KDW9mhgbbWuCAQFT8PlZ1umyBxIX-RxqfHqu4gTNT", true);
+  </script>
+</body>
+</html>
