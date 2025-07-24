@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CWEL CWEL CWEL</title>
+    <title>CWEL | Psie Szkolenia Specjalistyczne</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2c3e50;
@@ -11,6 +12,9 @@
             --light: #ecf0f1;
             --dark: #1a252f;
             --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #c0392b;
+            --gray: #95a5a6;
         }
         
         * {
@@ -20,6 +24,12 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
         body {
             background-color: var(--light);
             color: var(--dark);
@@ -27,16 +37,22 @@
         }
         
         header {
-            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://media.discordapp.net/attachments/1393294330382258176/1397338462889185450/image.png?ex=6882adda&is=68815c5a&hm=7dd3b5a77d0ccfe9a63421dcffd3cc2b3bca32e901db19c29a08f1dbedcf3685&=&format=webp&quality=lossless&width=2166&height=1216');
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), 
+                        url('https://media.discordapp.net/attachments/1393294330382258176/1397338462889185450/image.png?ex=6882adda&is=68815c5a&hm=7dd3b5a77d0ccfe9a63421dcffd3cc2b3bca32e901db19c29a08f1dbedcf3685&=&format=webp&quality=lossless&width=2166&height=1216');
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             color: white;
-            padding: 2rem 0;
+            padding: 0;
             text-align: center;
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+            margin: 0;
+            overflow: hidden;
         }
         
         nav {
@@ -44,6 +60,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
         
         nav ul {
@@ -51,6 +68,7 @@
             justify-content: center;
             list-style: none;
             padding: 1rem;
+            margin: 0;
         }
         
         nav ul li {
@@ -116,30 +134,37 @@
         }
         
         .hero-content {
-            max-width: 800px;
+            max-width: 1100px;
+            width: 100%;
             margin: 0 auto;
+            padding: 26rem 2rem 2rem;
+            position: center;
+            text-align: center;
+            top: 0;
+            z-index: 2;
         }
         
-        .services {
+        .training-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
         
-        .service-card {
+        .training-card {
             background-color: white;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
+            cursor: pointer;
         }
         
-        .service-card:hover {
+        .training-card:hover {
             transform: translateY(-10px);
         }
         
-        .service-img {
+        .training-img {
             height: 200px;
             background-size: cover;
             background-position: center;
@@ -152,13 +177,192 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
-        .service-content {
+        .training-content {
             padding: 1.5rem;
         }
         
-        .acronym {
-            font-weight: bold;
+        .training-content p {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .difficulty {
+            font-size: 0.8rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .difficulty i {
+            color: var(--warning);
+            margin-right: 0.3rem;
+        }
+        
+        .training-page {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
             color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+        
+        .back-btn:hover {
+            background: rgba(231, 76, 60, 0.2);
+            transform: translateX(-3px);
+        }
+        
+        .back-btn i {
+            margin-right: 0.5rem;
+        }
+        
+        .training-page h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .training-page h2 i {
+            margin-right: 0.8rem;
+            color: var(--secondary);
+        }
+        
+        .training-page h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid rgba(44, 62, 80, 0.2);
+            padding-bottom: 0.5rem;
+        }
+        
+        .training-page h4 {
+            color: var(--secondary);
+            margin: 1.2rem 0 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .training-steps {
+            margin-left: 1rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid rgba(44, 62, 80, 0.2);
+        }
+        
+        .training-steps p {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+        
+        .training-steps p strong {
+            color: var(--secondary);
+        }
+        
+        .warning {
+            background-color: rgba(243, 156, 18, 0.15);
+            padding: 1.2rem;
+            border-left: 4px solid var(--warning);
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+        }
+        
+        .warning i {
+            color: var(--warning);
+            font-size: 1.2rem;
+            margin-right: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .warning strong {
+            color: var(--warning);
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .training-tips {
+            background: rgba(39, 174, 96, 0.08);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--success);
+        }
+        
+        .training-tips h4 {
+            color: var(--success);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .training-tips h4 i {
+            margin-right: 0.5rem;
+        }
+        
+        .training-difficulty {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 1rem;
+            background: rgba(149, 165, 166, 0.08);
+            border-radius: 8px;
+        }
+        
+        .training-difficulty i {
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+            color: var(--warning);
+        }
+        
+        .training-difficulty span {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .training-time {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 1rem;
+            background: rgba(44, 62, 80, 0.08);
+            border-radius: 8px;
+        }
+        
+        .training-time i {
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .training-time span {
+            font-weight: 600;
+            color: var(--dark);
         }
         
         footer {
@@ -169,18 +373,55 @@
             margin-top: 3rem;
         }
         
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-content p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
         @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-            
             h1 {
                 font-size: 2.5rem;
+            }
+            
+            .training-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .training-page {
+                padding: 1.5rem;
+            }
+            
+            .hero-content {
+                padding: 4rem 1rem 1rem;
             }
         }
     </style>
@@ -189,108 +430,605 @@
     <nav>
         <ul>
             <li><a href="#home">Strona Główna</a></li>
-            <li><a href="#services">Szkolenia</a></li>
+            <li><a href="#trainings">Szkolenia</a></li>
         </ul>
     </nav>
     
     <header id="home">
         <div class="hero-content">
-            <h1>Profesjonalne Szkolenie Psów K-9</h1>
-            <p>Wyszkolimy Twojego psa do specjalistycznych zadań służbowych. Najwyższe standardy, doświadczeni instruktorzy i sprawdzone metody szkoleniowe.</p>
-            <p>(ale kśiądz to chuj.... ty chuju zajebany szlak mnie trafi chuju zajebany...)</p>
-            <a href="#services" class="btn">Peac and love kochajmy się</a>
+            <h1><i class="fas fa-paw"></i> Psie Szkolenia Specjalistyczne</h1>
+            <p>Profesjonalne szkolenia psów służbowych i policyjnych. Najwyższe standardy, doświadczeni instruktorzy i sprawdzone metody szkoleniowe.</p>
+            <a href="#trainings" class="btn">Zobacz szkolenia</a>
         </div>
     </header>
     
-    <main class="container">
-        <section id="services">
-            <h2>Rodzaje Szkoleń</h2>
-            <div class="services">
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://media1.tenor.com/m/vnX2IhoPSpEAAAAd/orange-cat-staring-orange-cat.gif');">OB</div>
-                    <div class="service-content">
-                        <h3>Posłuszeństwo (OB)</h3>
-                        <p>Podstawowe szkolenie komend: <strong>siad</strong>, <strong>waruj</strong>, <strong>zostań</strong>, <strong>przywołanie</strong>. Fundament każdego psa służbowego.</p>
-                    </div>
+    <main class="container" id="trainings">
+        <h2>Dostępne Szkolenia</h2>
+        
+        <div class="training-list">
+            <div class="training-card" onclick="showTraining('ob')">
+                <div class="training-img" style="background-image: url('https://media1.tenor.com/m/vnX2IhoPSpEAAAAd/orange-cat-staring-orange-cat.gif');">
+                    <i class="fas fa-dog"></i>  OB
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://media1.tenor.com/m/MFgCrsaUf1oAAAAd/playing-with-pussy-blackoen.gif');">BITE</div>
-                    <div class="service-content">
-                        <h3>Bite Apprehension (BITE)</h3>
-                        <p>Szkolenie chwytania i obezwładniania - <strong>kontrolowane gryzienie</strong> podejrzanych. Techniki obrony i ataku.</p>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://cdn.discordapp.com/attachments/1005914204705914921/1279416748793139252/IMG_2265.gif?ex=6882cef3&is=68817d73&hm=c4d6e806619ffe1c62707bdd7649d9e291000047a122bbdd35cf322d30262615&');">NDD</div>
-                    <div class="service-content">
-                        <h3>Narcotics Detection (NDD)</h3>
-                        <p>Pies do <strong>wykrywania narkotyków</strong>; szkolenie w lokalizacji zapachów narkotycznych różnych rodzajów.</p>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://cdn.discordapp.com/attachments/1293993685259649057/1302312335674708081/c0212942-800px-wm.gif?ex=688262e0&is=68811160&hm=bc5910b4d58e6fa3a84f9f2d79bdc1cc825afe901d5f74e7307ce426d79324d0&');">EDD</div>
-                    <div class="service-content">
-                        <h3>Explosives Detection (EDD)</h3>
-                        <p>Pies do <strong>wykrywania materiałów wybuchowych</strong>; wyspecjalizowany trening zapachowy.</p>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://media.discordapp.net/attachments/1175124914181779506/1179943244751183973/il_794xN.5000581745_ioi3.gif?ex=6882d0c7&is=68817f47&hm=1b4095366eea907d9e0c9a8a6236e5555487336383fd7da57e1f763dbe5c0da8&');">SAR</div>
-                    <div class="service-content">
-                        <h3>Search and Rescue (SAR)</h3>
-                        <p>Szkolenie psa do <strong>poszukiwania zaginionych osób</strong> (w terenie leśnym, gruzach, obszarach miejskich).</p>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://cdn.discordapp.com/attachments/1147499803794751508/1235318196869922966/Zrzut_ekranu_2024-05-01_215219.gif?ex=68828f39&is=68813db9&hm=cd99a3ba30ed9c4e2f64faac14456695658f678515cd509039eda74f8757cdee&');">TRK</div>
-                    <div class="service-content">
-                        <h3>Tracking (TRK)</h3>
-                        <p><strong>Śledzenie tropu</strong> osoby (świeżego lub starszego); praca na smyczy śledczej w różnych warunkach terenowych.</p>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://media.discordapp.net/attachments/1127631676609155094/1141364491536314418/attachment.gif?ex=68823684&is=6880e504&hm=87c07d560fc61ad7477f4dc17c19cd0e59ef1fdd939b08ccc1ecdb2464f62fb1&');">APO</div>
-                    <div class="service-content">
-                        <h3>Apprehension (APO)</h3>
-                        <p><strong>Zatrzymywanie i obezwładnianie</strong> podejrzanych (często łączone z BITE).</p>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://media.discordapp.net/attachments/1165320440315658342/1165592217986027541/gigacpun.gif?ex=6882ae98&is=68815d18&hm=5d2f51dfd3320d9efe33aa0cd85ee6e02a5040578222a9eb3140464c1958bfdc&');">DET</div>
-                    <div class="service-content">
-                        <h3>Detection (DET)</h3>
-                        <p>Ogólne określenie psów <strong>wykrywających</strong> (narkotyki, wybuchowe, broń, pieniądze itp.).</p>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://media1.tenor.com/m/XDKYSN7SyMkAAAAd/kurwa-oszaleje-crazy.gif');">HRD</div>
-                    <div class="service-content">
-                        <h3>Human Remains Detection (HRD)</h3>
-                        <p>Pies do <strong>wykrywania ludzkich szczątków</strong> (w wypadkach masowych, katastrofach, do celów kryminalistycznych).</p>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img" style="background-image: url('https://media.discordapp.net/attachments/919335494473621564/1219921813245657138/ezgif.com-gif-maker-1.gif?ex=688293f9&is=68814279&hm=610e214eb33624a506336446b781b4e90433baf03e37f7a4a3a28013f712174b&');">CS</div>
-                    <div class="service-content">
-                        <h3>Controlled Search (CS)</h3>
-                        <p><strong>Kontrolowane przeszukanie</strong>; pies przeszukuje określony obszar na komendę w poszukiwaniu osób lub przedmiotów.</p>
-                    </div>
+                <div class="training-content">
+                    <h3>Obedience (Posłuszeństwo)</h3>
+                    <p>Posłuszeństwo; podstawowe szkolenie komend (siad, waruj, zostań, przywołanie).</p>
+                    <div class="difficulty"><i class="fas fa-star"></i> Poziom: Początkujący</div>
                 </div>
             </div>
-        </section>
+            
+            <div class="training-card" onclick="showTraining('bite')">
+                <div class="training-img" style="background-image: url('https://media1.tenor.com/m/MFgCrsaUf1oAAAAd/playing-with-pussy-blackoen.gif');">
+                    <i class="fas fa-teeth"></i> BITE
+                </div>
+                <div class="training-content">
+                    <h3>Bite Apprehension</h3>
+                    <p>Szkolenie chwytania i obezwładniania – kontrolowane gryzienie podejrzanych.</p>
+                    <div class="difficulty"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> Poziom: Zaawansowany</div>
+                </div>
+            </div>
+            
+            <div class="training-card" onclick="showTraining('ndd')">
+                <div class="training-img" style="background-image: url('https://cdn.discordapp.com/attachments/1005914204705914921/1279416748793139252/IMG_2265.gif?ex=6882cef3&amp;is=68817d73&amp;hm=c4d6e806619ffe1c62707bdd7649d9e291000047a122bbdd35cf322d30262615&amp;');">
+                    <i class="fas fa-cannabis"></i> NDD
+                </div>
+                <div class="training-content">
+                    <h3>Narcotics Detection</h3>
+                    <p>Pies do wykrywania narkotyków; szkolenie w lokalizacji zapachów narkotycznych.</p>
+                    <div class="difficulty"><i class="fas fa-star"></i><i class="fas fa-star"></i> Poziom: Średniozaawansowany</div>
+                </div>
+            </div>
+            
+            <div class="training-card" onclick="showTraining('edd')">
+                <div class="training-img" style="background-image: url('https://cdn.discordapp.com/attachments/1293993685259649057/1302312335674708081/c0212942-800px-wm.gif?ex=688262e0&amp;is=68811160&amp;hm=bc5910b4d58e6fa3a84f9f2d79bdc1cc825afe901d5f74e7307ce426d79324d0&amp;');">
+                    <i class="fas fa-bomb"></i> EDD
+                </div>
+                <div class="training-content">
+                    <h3>Explosives Detection</h3>
+                    <p>Pies do wykrywania materiałów wybuchowych; wyspecjalizowany trening zapachowy.</p>
+                    <div class="difficulty"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> Poziom: Zaawansowany</div>
+                </div>
+            </div>
+            
+            <div class="training-card" onclick="showTraining('sar')">
+                <div class="training-img" style="background-image: url('https://media.discordapp.net/attachments/1175124914181779506/1179943244751183973/il_794xN.5000581745_ioi3.gif?ex=6882d0c7&amp;is=68817f47&amp;hm=1b4095366eea907d9e0c9a8a6236e5555487336383fd7da57e1f763dbe5c0da8&amp;');">
+                    <i class="fas fa-search-plus"></i> SAR
+                </div>
+                <div class="training-content">
+                    <h3>Search and Rescue</h3>
+                    <p>Szkolenie psa do poszukiwania zaginionych osób (np. w terenie leśnym, gruzach).</p>
+                    <div class="difficulty"><i class="fas fa-star"></i><i class="fas fa-star"></i> Poziom: Średniozaawansowany</div>
+                </div>
+            </div>
+            
+            <div class="training-card" onclick="showTraining('trk')">
+                <div class="training-img" style="background-image: url('https://cdn.discordapp.com/attachments/1147499803794751508/1235318196869922966/Zrzut_ekranu_2024-05-01_215219.gif?ex=68828f39&amp;is=68813db9&amp;hm=cd99a3ba30ed9c4e2f64faac14456695658f678515cd509039eda74f8757cdee&amp;');">
+                    <i class="fas fa-shoe-prints"></i> TRK
+                </div>
+                <div class="training-content">
+                    <h3>Tracking (Tropienie)</h3>
+                    <p>Śledzenie tropu osoby (świeżego lub starszego); praca na smyczy śledczej.</p>
+                    <div class="difficulty"><i class="fas fa-star"></i><i class="fas fa-star"></i> Poziom: Średniozaawansowany</div>
+                </div>
+            </div>
+            
+            <div class="training-card" onclick="showTraining('apo')">
+                <div class="training-img" style="background-image: url('https://media.discordapp.net/attachments/1127631676609155094/1141364491536314418/attachment.gif?ex=68823684&amp;is=6880e504&amp;hm=87c07d560fc61ad7477f4dc17c19cd0e59ef1fdd939b08ccc1ecdb2464f62fb1&amp;');">
+                    <i class="fas fa-handcuffs"></i> APO
+                </div>
+                <div class="training-content">
+                    <h3>Apprehension</h3>
+                    <p>Zatrzymywanie i obezwładnianie podejrzanych (często łączone z BITE).</p>
+                    <div class="difficulty"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> Poziom: Zaawansowany</div>
+                </div>
+            </div>
+            
+            <div class="training-card" onclick="showTraining('det')">
+                <div class="training-img" style="background-image: url('https://media.discordapp.net/attachments/1165320440315658342/1165592217986027541/gigacpun.gif?ex=6882ae98&amp;is=68815d18&amp;hm=5d2f51dfd3320d9efe33aa0cd85ee6e02a5040578222a9eb3140464c1958bfdc&amp;');">
+                    <i class="fas fa-search"></i> DET
+                </div>
+                <div class="training-content">
+                    <h3>Detection</h3>
+                    <p>Ogólne określenie psów wykrywających (narkotyki, wybuchowe, broń itp.).</p>
+                    <div class="difficulty"><i class="fas fa-star"></i><i class="fas fa-star"></i> Poziom: Średniozaawansowany</div>
+                </div>
+            </div>
+            
+            <div class="training-card" onclick="showTraining('hrd')">
+                <div class="training-img" style="background-image: url('https://media1.tenor.com/m/XDKYSN7SyMkAAAAd/kurwa-oszaleje-crazy.gif');">
+                    <i class="fas fa-bone"></i> HRD
+                </div>
+                <div class="training-content">
+                    <h3>Human Remains Detection</h3>
+                    <p>Pies do wykrywania ludzkich szczątków (np. w wypadkach masowych).</p>
+                    <div class="difficulty"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> Poziom: Zaawansowany</div>
+                </div>
+            </div>
+            
+            <div class="training-card" onclick="showTraining('cs')">
+                <div class="training-img" style="background-image: url('https://media.discordapp.net/attachments/919335494473621564/1219921813245657138/ezgif.com-gif-maker-1.gif?ex=688293f9&amp;is=68814279&amp;hm=610e214eb33624a506336446b781b4e90433baf03e37f7a4a3a28013f712174b&amp;');">
+                    <i class="fas fa-boxes"></i> CS
+                </div>
+                <div class="training-content">
+                    <h3>Controlled Search</h3>
+                    <p>Kontrolowane przeszukanie; pies przeszukuje określony obszar na komendę.</p>
+                    <div class="difficulty"><i class="fas fa-star"></i><i class="fas fa-star"></i> Poziom: Średniozaawansowany</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strony ze szkoleniami -->
+        <div id="ob" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-dog"></i> OB - Obedience (Posłuszeństwo)</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Początkujący | 
+                    <span>Czas szkolenia:</span> 4-8 tygodni | 
+                    <span>Wymagane:</span> Podstawowe smakołyki, smycz
+                </div>
+            </div>
+            
+            <h3>Jak samodzielnie nauczyć psa podstawowych komend:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Komenda "Siad"</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Przygotuj smakołyk i pokaż go psu trzymając nad jego głową.</p>
+                <p><strong>Krok 2:</strong> Powoli przesuń rękę z smakołykiem do tyłu głowy psa. Naturalnie powinien usiąść.</p>
+                <p><strong>Krok 3:</strong> Gdy pies siada, powiedz "siad" i natychmiast daj nagrodę.</p>
+                <p><strong>Krok 4:</strong> Powtarzaj ćwiczenie 5-10 razy dziennie przez kilka dni.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Komenda "Waruj"</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zacznij od psa w pozycji siedzącej.</p>
+                <p><strong>Krok 2:</strong> Trzymając smakołyk przed nosem psu, powoli opuść rękę w dół do ziemi.</p>
+                <p><strong>Krok 3:</strong> Gdy pies się położy, powiedz "waruj" i daj nagrodę.</p>
+                <p><strong>Krok 4:</strong> Stopniowo zwiększaj czas pomiędzy komendą a nagrodą.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Komenda "Zostań"</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zacznij od psa w pozycji siedzącej lub leżącej.</p>
+                <p><strong>Krok 2:</strong> Pokaż otwartą dłoń przed psem i powiedz "zostań".</p>
+                <p><strong>Krok 3:</strong> Zrób krok do tyłu. Jeśli pies pozostanie, wróć i nagródź.</p>
+                <p><strong>Krok 4:</strong> Stopniowo zwiększaj dystans i czas pozostawania.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Przywołanie</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zacznij w zamkniętym, bezpiecznym obszarze.</p>
+                <p><strong>Krok 2:</strong> Używaj entuzjastycznego tonu i mów "do mnie" lub "noga".</p>
+                <p><strong>Krok 3:</strong> Gdy pies podejdzie, nagródź go entuzjastycznie i smakołykiem.</p>
+                <p><strong>Krok 4:</strong> Stopniowo zwiększaj poziom rozproszeń podczas ćwiczenia.</p>
+            </div>
+            
+            <div class="training-tips">
+                <h4><i class="fas fa-lightbulb"></i> Wskazówki treningowe</h4>
+                <ul>
+                    <li>Ćwicz krótkie sesje (5-10 minut) kilka razy dziennie</li>
+                    <li>Zawsze kończ trening na pozytywnej notce</li>
+                    <li>Używaj konsekwentnych komend i gestów</li>
+                    <li>Stopniowo zmniejszaj liczbę smakołyków, zastępując je pochwałami</li>
+                    <li>Trenuj w różnych miejscach, aby pies generalizował komendy</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Sekcja BITE - Obrona -->
+        <div id="bite" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-shield-alt"></i> BITE - Obrona i ochrona</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Zaawansowany | 
+                    <span>Czas szkolenia:</span> 6-12 miesięcy | 
+                    <span>Wymagane:</span> Specjalistyczny sprzęt, pomoc trenera
+                </div>
+            </div>
+            
+            <h3>Podstawy szkolenia obronnego:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Wybór odpowiedniego psa</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Oceń predyspozycje psa - pewność siebie, odporność na stres.</p>
+                <p><strong>Krok 2:</strong> Sprawdź reakcję na bodźce dźwiękowe i wzrokowe.</p>
+                <p><strong>Krok 3:</strong> Przeprowadź testy charakteru pod okiem specjalisty.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Nauka chwytu</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zacznij od zabawy w przeciąganie szmaty.</p>
+                <p><strong>Krok 2:</strong> Wprowadź specjalistyczny rękaw treningowy.</p>
+                <p><strong>Krok 3:</strong> Naucz psa chwytu na komendę i zwalniania na polecenie.</p>
+            </div>
+            
+            <div class="training-tips">
+                <h4><i class="fas fa-lightbulb"></i> Ważne uwagi</h4>
+                <ul>
+                    <li>Szkolenie obronne tylko pod okiem wykwalifikowanego instruktora</li>
+                    <li>Pies musi być w pełni posłuszny w podstawowych komendach</li>
+                    <li>Regularne badania weterynaryjne psa są obowiązkowe</li>
+                    <li>Zawsze przestrzegaj lokalnych przepisów dotyczących psów obronnych</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sekcja NDD - Noszenie -->
+        <div id="ndd" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-box-open"></i> NDD - Noszenie przedmiotów</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Średniozaawansowany | 
+                    <span>Czas szkolenia:</span> 4-6 tygodni | 
+                    <span>Wymagane:</span> Miękki przedmiot do noszenia, smakołyki
+                </div>
+            </div>
+            
+            <h3>Jak nauczyć psa noszenia przedmiotów:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Nauka chwytania przedmiotu</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zachęć psa do zainteresowania się przedmiotem (np. miękką zabawką).</p>
+                <p><strong>Krok 2:</strong> Nagradzaj każde dotknięcie pyska przedmiotu.</p>
+                <p><strong>Krok 3:</strong> Stopniowo wymagaj dłuższego trzymania przedmiotu w pysku.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Noszenie przedmiotu</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zachęć psa do przejścia z przedmiotem w pysku.</p>
+                <p><strong>Krok 2:</strong> Zacznij od krótkich dystansów (1-2 kroki).</p>
+                <p><strong>Krok 3:</strong> Stopniowo zwiększaj odległość i czas noszenia.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Oddawanie przedmiotu</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Naucz komendy "puść" lub "oddaj".</p>
+                <p><strong>Krok 2:</strong> Wymieniaj przedmiot na smakołyk.</p>
+                <p><strong>Krok 3:</strong> Ćwicz w różnych miejscach i z różnymi przedmiotami.</p>
+            </div>
+        </div>
+
+        <!-- Sekcja SAR - Ratownictwo -->
+        <div id="sar" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-search"></i> SAR - Ratownictwo i poszukiwania</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Zaawansowany | 
+                    <span>Czas szkolenia:</span> 12-24 miesiące | 
+                    <span>Wymagane:</span> Specjalistyczny sprzęt, certyfikowany trener
+                </div>
+            </div>
+            
+            <h3>Podstawy szkolenia ratowniczego:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Rozwijanie węchu</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zacznij od zabaw węchowych w domu.</p>
+                <p><strong>Krok 2:</strong> Wprowadź poszukiwanie ukrytych smakołyków.</p>
+                <p><strong>Krok 3:</strong> Stopniowo zwiększaj obszar poszukiwań i poziom trudności.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Poszukiwanie osób</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Naucz psa kojarzyć zapach człowieka z nagrodą.</p>
+                <p><strong>Krok 2:</strong> Wprowadź komendę szukaj i zachęć do poszukiwań.</p>
+                <p><strong>Krok 3:</strong> Ćwicz w różnych warunkach terenowych i pogodowych.</p>
+            </div>
+            
+            <div class="training-tips">
+                <h4><i class="fas fa-lightbulb"></i> Wskazówki</h4>
+                <ul>
+                    <li>Pies ratowniczy musi być odporny na stres i hałasy</li>
+                    <li>Regularne ćwiczenia terenowe są kluczowe</li>
+                    <li>Wymagane są badania weterynaryjne i testy sprawnościowe</li>
+                    <li>Współpraca z organizacjami ratowniczymi jest niezbędna</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sekcja TRK - Tropienie -->
+        <div id="trk" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-shoe-prints"></i> TRK - Tropienie</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Średniozaawansowany | 
+                    <span>Czas szkolenia:</span> 8-12 tygodni | 
+                    <span>Wymagane:</span> Szelki tropowe, przedmioty z zapachem
+                </div>
+            </div>
+            
+            <h3>Jak nauczyć psa tropienia:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Przygotowanie do tropienia</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Wybierz odpowiednie szelki tropowe (inne niż do codziennych spacerów).</p>
+                <p><strong>Krok 2:</strong> Naucz psa kojarzenia szelek z pracą węchową.</p>
+                <p><strong>Krok 3:</strong> Zacznij od krótkich, prostych ścieżek (5-10 metrów).</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Budowanie ścieżki</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zostaw wyraźny zapach na ścieżce (np. swoją chusteczkę).</p>
+                <p><strong>Krok 2:</strong> Umieść smakołyki wzdłuż trasy co 1-2 metry.</p>
+                <p><strong>Krok 3:</strong> Stopniowo zmniejszaj liczbę smakołyków, zwiększając długość trasy.</p>
+            </div>
+            
+            <div class="training-tips">
+                <h4><i class="fas fa-lightbulb"></i> Porady</h4>
+                <ul>
+                    <li>Ćwicz w różnych porach dnia i warunkach pogodowych</li>
+                    <li>Zaczynaj zawsze na krótkich, prostych trasach</li>
+                    <li>Nie spiesz psa - pozwól mu pracować nosem w swoim tempie</li>
+                    <li>Nagradzaj każde poprawne wykonanie zadania</li>
+                </ul>
+            </div>
+        </div>
+                <!-- Sekcja EDD - Wykrywanie zapachów -->
+        <div id="edd" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-nose"></i> EDD - Wykrywanie zapachów</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Średniozaawansowany | 
+                    <span>Czas szkolenia:</span> 3-6 miesięcy | 
+                    <span>Wymagane:</span> Próbki zapachowe, pojemniki do węszenia
+                </div>
+            </div>
+            
+            <h3>Jak szkolić psa do wykrywania specyficznych zapachów:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Przygotowanie zapachu</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Wybierz docelowy zapach (np. narkotyki, pieniądze, leki).</p>
+                <p><strong>Krok 2:</strong> Przygotuj bezpieczne próbki w specjalnych pojemnikach.</p>
+                <p><strong>Krok 3:</strong> Naucz psa kojarzyć konkretny zapach z nagrodą.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Nauka wskazywania</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zacznij od jednego pojemnika z docelowym zapachem.</p>
+                <p><strong>Krok 2:</strong> Nagradzaj psa za prawidłową reakcję na zapach.</p>
+                <p><strong>Krok 3:</strong> Stopniowo zwiększaj liczbę pojemników i poziom trudności.</p>
+            </div>
+            
+            <div class="training-tips">
+                <h4><i class="fas fa-lightbulb"></i> Wskazówki specjalne</h4>
+                <ul>
+                    <li>Zawsze używaj bezpiecznych próbek zapachowych</li>
+                    <li>Regularnie zmieniaj układ pojemników</li>
+                    <li>Pracuj w różnych środowiskach (wnętrza, teren otwarty)</li>
+                    <li>Utrzymuj wysoką motywację psa poprzez różnorodne nagrody</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sekcja APO - Agility dla początkujących -->
+        <div id="apo" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-running"></i> APO - Agility podstawowe</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Początkujący | 
+                    <span>Czas szkolenia:</span> 8-12 tygodni | 
+                    <span>Wymagane:</span> Podstawowy tor agility, smakołyki
+                </div>
+            </div>
+            
+            <h3>Wprowadzenie do agility:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Przygotowanie fizyczne psa</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zadbaj o odpowiednią rozgrzewkę przed treningiem.</p>
+                <p><strong>Krok 2:</strong> Zacznij od prostych ćwiczeń poprawiających zwinność.</p>
+                <p><strong>Krok 3:</strong> Stopniowo zwiększaj intensywność ćwiczeń.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Przeszkody podstawowe</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zacznij od nauki tunelu (najłatwiejsza przeszkoda).</p>
+                <p><strong>Krok 2:</strong> Wprowadź niskie hopki (10-15 cm).</p>
+                <p><strong>Krok 3:</strong> Naucz psa przechodzenia przez slalom (3-5 tyczek).</p>
+            </div>
+            
+            <div class="training-tips">
+                <h4><i class="fas fa-lightbulb"></i> Porady agility</h4>
+                <ul>
+                    <li>Zawsze dostosowuj wysokość przeszkód do wielkości psa</li>
+                    <li>Nie forsuj psa - agility ma być zabawą</li>
+                    <li>Ćwicz regularnie, ale nie częściej niż 3-4 razy w tygodniu</li>
+                    <li>Zadbaj o odpowiednią nawierzchnię (nie śliską)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sekcja DET - Detekcja -->
+        <div id="det" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-search-plus"></i> DET - Detekcja specjalistyczna</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Zaawansowany | 
+                    <span>Czas szkolenia:</span> 6-18 miesięcy | 
+                    <span>Wymagane:</span> Certyfikowany trener, specjalistyczny sprzęt
+                </div>
+            </div>
+            
+            <h3>Szkolenie psów detekcyjnych:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Wybór specjalizacji</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zdecyduj o kierunku szkolenia (np. materiały wybuchowe, narkotyki).</p>
+                <p><strong>Krok 2:</strong> Przeprowadź testy predyspozycji psa.</p>
+                <p><strong>Krok 3:</strong> Opracuj plan szkolenia z profesjonalistą.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Metody wskazywania</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Naucz psa konkretnej reakcji na znaleziony zapach.</p>
+                <p><strong>Krok 2:</strong> Wprowadź różne środowiska pracy.</p>
+                <p><strong>Krok 3:</strong> Ćwicz scenariusze realistyczne.</p>
+            </div>
+            
+            <div class="training-tips">
+                <h4><i class="fas fa-lightbulb"></i> Wskazówki detekcyjne</h4>
+                <ul>
+                    <li>Pies musi być w pełni zrównoważony psychicznie</li>
+                    <li>Wymagane są regularne testy skuteczności</li>
+                    <li>Pracuj z legalnymi próbkami zapachowymi</li>
+                    <li>Zawsze przestrzegaj procedur bezpieczeństwa</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sekcja HRD - Ratownictwo gruzowe -->
+        <div id="hrd" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-building"></i> HRD - Ratownictwo gruzowe</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Ekspert | 
+                    <span>Czas szkolenia:</span> 18-24 miesiące | 
+                    <span>Wymagane:</span> Specjalistyczne przeszkolenie, uprawnienia
+                </div>
+            </div>
+            
+            <h3>Przygotowanie psa do pracy na gruzowisku:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Przyzwyczajanie do środowiska</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zacznij od pracy na stabilnych, niskich konstrukcjach.</p>
+                <p><strong>Krok 2:</strong> Wprowadzaj różne podłoża i materiały budowlane.</p>
+                <p><strong>Krok 3:</strong> Przyzwyczajaj psa do hałasów maszyn budowlanych.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Techniki poszukiwawcze</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Naucz psa systematycznego przeszukiwania obszaru.</p>
+                <p><strong>Krok 2:</strong> Wprowadź sygnalizowanie znalezionych osób.</p>
+                <p><strong>Krok 3:</strong> Ćwicz w realistycznych warunkach symulowanych katastrof.</p>
+            </div>
+            
+            <div class="training-tips">
+                <h4><i class="fas fa-lightbulb"></i> Bezpieczeństwo</h4>
+                <ul>
+                    <li>Zawsze pracuj z asekuracją</li>
+                    <li>Regularnie sprawdzaj kondycję psa</li>
+                    <li>Używaj odpowiedniego sprzętu ochronnego</li>
+                    <li>Współpracuj z profesjonalnymi służbami ratowniczymi</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sekcja CS - Canicross -->
+        <div id="cs" class="training-page">
+            <a href="#" class="back-btn" onclick="hideTraining()"><i class="fas fa-arrow-left"></i> Powrót do listy</a>
+            <h2><i class="fas fa-running"></i> CS - Canicross</h2>
+            
+            <div class="training-difficulty">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <span>Poziom trudności:</span> Średniozaawansowany | 
+                    <span>Czas szkolenia:</span> 4-8 tygodni | 
+                    <span>Wymagane:</span> Szelki do canicrossu, pas biodrowy
+                </div>
+            </div>
+            
+            <h3>Wprowadzenie do biegania z psem:</h3>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Przygotowanie psa</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Zadbaj o podstawowe badanie weterynaryjne.</p>
+                <p><strong>Krok 2:</strong> Zacznij od krótkich spacerów w szelkach treningowych.</p>
+                <p><strong>Krok 3:</strong> Stopniowo zwiększaj dystans i tempo.</p>
+            </div>
+            
+            <h4><i class="fas fa-hand-point-right"></i> Technika biegu</h4>
+            <div class="training-steps">
+                <p><strong>Krok 1:</strong> Naucz psa biegu przed przewodnikiem.</p>
+                <p><strong>Krok 2:</strong> Wprowadź komendy kierunkowe ("lewo", "prawo").</p>
+                <p><strong>Krok 3:</strong> Ćwicz różne tempo biegu i zmiany kierunku.</p>
+            </div>
+            
+            <div class="training-tips">
+                <h4><i class="fas fa-lightbulb"></i> Porady biegowe</h4>
+                <ul>
+                    <li>Zawsze zaczynaj od rozgrzewki</li>
+                    <li>Dostosuj dystans do możliwości psa</li>
+                    <li>Unikaj biegania w upalne dni</li>
+                    <li>Regularnie sprawdzaj stan opuszek łap psa</li>
+                    <li>Zadbaj o odpowiednie nawodnienie podczas treningów</li>
+                </ul>
+            </div>
+        </div>
     </main>
-    
+
     <footer>
-        <p>&copy; JEBAC LGBTQ+ </p>
+        <div class="footer-content">
+            <p><i class="fas fa-paw"></i> Psie Szkolenia Specjalistyczne</p>
+            <p>Strona edukacyjna o metodach szkolenia psów. Skonsultuj się z profesjonalistą przed rozpoczęciem specjalistycznych szkoleń.</p>
+        </div>
     </footer>
+
+    <script>
+        function showTraining(trainingId) {
+            // Ukryj wszystkie strony szkoleń
+            document.querySelectorAll('.training-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Pokaż wybrane szkolenie
+            const trainingPage = document.getElementById(trainingId);
+            trainingPage.style.display = 'block';
+            
+            // Przewiń do wybranego szkolenia (zmiana z scrollTo(0,0))
+            trainingPage.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        function hideTraining() {
+            // Ukryj wszystkie strony szkoleń
+            document.querySelectorAll('.training-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Przewiń do sekcji z kartami
+            document.querySelector('.training-list').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Dodatkowe rozwiązanie problemu z białym paskiem
+        document.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const header = document.querySelector('header');
+            
+            if (scrollPosition > header.offsetHeight) {
+                document.body.style.backgroundPositionY = -scrollPosition + 'px';
+            }
+        });
+    </script>
 </body>
 </html>
