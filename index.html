@@ -1466,46 +1466,56 @@
             observer.observe(el);
         });
 
-        // 🔥 FUNKCJA POBIERAJĄCA LICZBĘ GRACZY - DZIAŁA Z PROXY
+        // 🔥 FUNKCJA Z DZIAŁAJĄCYM PROXY (NIE WYMAGA AKTYWACJI)
         async function updatePlayerCount() {
             const serverId = '4om3xv';
             
-            // Używamy sprawdzonego proxy CORS
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            // Używamy allorigins - darmowe proxy, działa od razu
+            const proxyUrl = 'https://api.allorigins.win/raw?url=';
             const apiUrl = `https://frontend.cfx-services.net/api/servers/single/${serverId}`;
-            const url = proxyUrl + apiUrl;
+            const url = proxyUrl + encodeURIComponent(apiUrl);
             
             try {
-                // Pokaż loader podczas ładowania
-                document.getElementById('players-count').innerHTML = '<span class="loading-spinner"></span>Ładowanie...';
+                // Pokaż loader
+                const playersSpan = document.getElementById('players-count');
+                if (playersSpan) playersSpan.innerHTML = '<span class="loading-spinner"></span>Ładowanie...';
                 
                 const response = await fetch(url);
                 const data = await response.json();
                 
-                // Sprawdź czy dane są poprawne (struktura: data.Data.clients)
+                // Sprawdź strukturę danych (Twoje API ma strukturę data.Data.clients)
                 if (data && data.Data && data.Data.clients !== undefined) {
                     const playerCount = data.Data.clients;
                     
-                    console.log('Liczba graczy:', playerCount); // Dla debugowania
+                    console.log('Liczba graczy:', playerCount);
                     
-                    // Aktualizacja wszystkich elementów na stronie
-                    document.getElementById('players-count').innerHTML = `Online: ${playerCount} klientów`;
-                    document.getElementById('hero-players').textContent = playerCount;
-                    document.getElementById('contact-players').textContent = playerCount;
-                    document.getElementById('hours-players').textContent = playerCount;
-                    document.getElementById('footer-players').textContent = playerCount;
-                    document.getElementById('footer-bottom-players').textContent = playerCount;
+                    // Aktualizacja wszystkich elementów
+                    if (document.getElementById('players-count'))
+                        document.getElementById('players-count').innerHTML = `Online: ${playerCount} klientów`;
+                    if (document.getElementById('hero-players'))
+                        document.getElementById('hero-players').textContent = playerCount;
+                    if (document.getElementById('contact-players'))
+                        document.getElementById('contact-players').textContent = playerCount;
+                    if (document.getElementById('hours-players'))
+                        document.getElementById('hours-players').textContent = playerCount;
+                    if (document.getElementById('footer-players'))
+                        document.getElementById('footer-players').textContent = playerCount;
+                    if (document.getElementById('footer-bottom-players'))
+                        document.getElementById('footer-bottom-players').textContent = playerCount;
                     
                     // Zielona kropka (online)
-                    document.getElementById('status-dot').style.background = '#10b981';
+                    if (document.getElementById('status-dot'))
+                        document.getElementById('status-dot').style.background = '#10b981';
                 } else {
                     throw new Error('Nieprawidłowa struktura danych');
                 }
                 
             } catch (error) {
                 console.error('Błąd połączenia:', error);
-                document.getElementById('players-count').innerHTML = 'Online: błąd połączenia';
-                document.getElementById('status-dot').style.background = '#6b7280'; // szary
+                if (document.getElementById('players-count'))
+                    document.getElementById('players-count').innerHTML = 'Online: błąd połączenia';
+                if (document.getElementById('status-dot'))
+                    document.getElementById('status-dot').style.background = '#6b7280'; // szary
             }
         }
 
@@ -1516,9 +1526,6 @@
             // Odświeżaj co 30 sekund
             setInterval(updatePlayerCount, 30000);
         });
-
-        // Instrukcja dla użytkownika (wyświetli się w konsoli)
-        console.log('Aby strona działała, wejdź raz na: https://cors-anywhere.herokuapp.com/ i kliknij przycisk, aby tymczasowo odblokować CORS');
     </script>
 </body>
 </html>
