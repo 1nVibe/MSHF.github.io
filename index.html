@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MechPro FiveM | Profesjonalny mechanik | Online: Ładowanie...</title>
+    <title>MechPro FiveM | Profesjonalny mechanik | Online: 0 klientów</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -1090,7 +1090,7 @@
         </div>
         <div class="status-badge" id="server-status">
             <div class="status-dot" id="status-dot"></div>
-            <span class="status-text" id="players-count"><span class="loading-spinner"></span>Ładowanie...</span>
+            <span class="status-text" id="players-count">Online: 0 klientów</span>
             <span class="status-count">24/7</span>
         </div>
     </nav>
@@ -1466,21 +1466,15 @@
             observer.observe(el);
         });
 
-        // 🔥 FUNKCJA Z DZIAŁAJĄCYM PROXY (NIE WYMAGA AKTYWACJI)
+        // 🔥 FUNKCJA POBIERAJĄCA DANE BEZPOŚREDNIO Z TWOJEGO API
         async function updatePlayerCount() {
             const serverId = '4om3xv';
             
-            // Używamy allorigins - darmowe proxy, działa od razu
-            const proxyUrl = 'https://api.allorigins.win/raw?url=';
+            // Używamy bezpośredniego adresu API (bez proxy)
             const apiUrl = `https://frontend.cfx-services.net/api/servers/single/${serverId}`;
-            const url = proxyUrl + encodeURIComponent(apiUrl);
             
             try {
-                // Pokaż loader
-                const playersSpan = document.getElementById('players-count');
-                if (playersSpan) playersSpan.innerHTML = '<span class="loading-spinner"></span>Ładowanie...';
-                
-                const response = await fetch(url);
+                const response = await fetch(apiUrl);
                 const data = await response.json();
                 
                 // Sprawdź strukturę danych (Twoje API ma strukturę data.Data.clients)
@@ -1490,32 +1484,27 @@
                     console.log('Liczba graczy:', playerCount);
                     
                     // Aktualizacja wszystkich elementów
-                    if (document.getElementById('players-count'))
-                        document.getElementById('players-count').innerHTML = `Online: ${playerCount} klientów`;
-                    if (document.getElementById('hero-players'))
-                        document.getElementById('hero-players').textContent = playerCount;
-                    if (document.getElementById('contact-players'))
-                        document.getElementById('contact-players').textContent = playerCount;
-                    if (document.getElementById('hours-players'))
-                        document.getElementById('hours-players').textContent = playerCount;
-                    if (document.getElementById('footer-players'))
-                        document.getElementById('footer-players').textContent = playerCount;
-                    if (document.getElementById('footer-bottom-players'))
-                        document.getElementById('footer-bottom-players').textContent = playerCount;
+                    document.getElementById('players-count').innerHTML = `Online: ${playerCount} klientów`;
+                    document.getElementById('hero-players').textContent = playerCount;
+                    document.getElementById('contact-players').textContent = playerCount;
+                    document.getElementById('hours-players').textContent = playerCount;
+                    document.getElementById('footer-players').textContent = playerCount;
+                    document.getElementById('footer-bottom-players').textContent = playerCount;
                     
-                    // Zielona kropka (online)
-                    if (document.getElementById('status-dot'))
+                    // Zielona kropka (zielona jeśli >0, pomarańczowa jeśli 0)
+                    if (playerCount > 0) {
                         document.getElementById('status-dot').style.background = '#10b981';
+                    } else {
+                        document.getElementById('status-dot').style.background = '#f59e0b'; // pomarańczowy
+                    }
                 } else {
                     throw new Error('Nieprawidłowa struktura danych');
                 }
                 
             } catch (error) {
                 console.error('Błąd połączenia:', error);
-                if (document.getElementById('players-count'))
-                    document.getElementById('players-count').innerHTML = 'Online: błąd połączenia';
-                if (document.getElementById('status-dot'))
-                    document.getElementById('status-dot').style.background = '#6b7280'; // szary
+                document.getElementById('players-count').innerHTML = 'Online: błąd połączenia';
+                document.getElementById('status-dot').style.background = '#6b7280'; // szary
             }
         }
 
